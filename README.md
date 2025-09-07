@@ -156,3 +156,5 @@ ale kojarzę mniej więcej jak to wygląda.
 
 PS3: oczywiście nie ukrywam bo moim zdaniem nie ma co, 
 korzystałem z gpt dla generowania niektorych mechanizmów, w tym też częściowo dokumentacji :)
+
+PS4: Oczywiście za całą reszte się ręczam!
