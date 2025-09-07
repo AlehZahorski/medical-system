@@ -26,8 +26,8 @@ uruchamiany lokalnie przy użyciu Docker Compose oraz zautomatyzowany w GitLab C
 
 a) Sklonuj repozytorium:
 
-- git clone <link-do-repo>
-- cd <nazwa-folderu>
+- git clone https://github.com/AlehZahorski/medical-system.git
+- cd medical-system
 
 b) Skopiuj plik `.env`:
 
@@ -139,8 +139,20 @@ docker push registry.gitlab.com/username/project-name
 
 **Aleh Zahorski**  
 Zadanie wykonane w ramach procesu rekrutacyjnego.  
-Czas realizacji: maksymalnie 7 dni od otrzymania zadania.
+Czas realizacji: ~8h
 
 ---
 
-Dziękuję za możliwość wykonania zadania!
+Dziękuję za możliwość wykonania zadania! 
+Nie udało mi się lokalnie uruchomić gitlab proces, 
+przewaznie pracowałem i obecnie pracuję z bitbucket, 
+dlatego konfuguracja ci/cd wyglada nie co inaczej dla mnie na co dzień, 
+ale podejrzewam ze z gitlab tak samo nie ma nic trudnego :)
+
+PS: wyglada sensownie ta konfiguracja co mi chat podał, ale nie ręczę się za to!
+
+PS2: testy zrobiłem jakie potrafie, spec oraz unit, na froncie testów nigdy nie robiłem, 
+ale kojarzę mniej więcej jak to wygląda.
+
+PS3: oczywiście nie ukrywam bo moim zdaniem nie ma co, 
+korzystałem z gpt dla generowania niektorych mechanizmów, w tym też częściowo dokumentacji :)
