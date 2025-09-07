@@ -1,0 +1,63 @@
+image: php:8.3
+
+variables:
+  DB_HOST: mysql
+  DB_PORT: 3306
+  DB_USERNAME: root
+  DB_PASSWORD: root
+  DB_DATABASE: testing_db
+  APP_ENV: testing
+
+services:
+  - mysql:8.0
+
+stages:
+  - test
+  - build
+  - docker
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - vendor/
+    - node_modules/
+
+before_script:
+  - apt-get update && apt-get install -y unzip git curl zip libzip-dev libpng-dev libjpeg-dev libfreetype6-dev
+  - docker-php-ext-install pdo_mysql zip
+  - curl -sS https://getcomposer.org/installer | php
+  - mv composer.phar /usr/local/bin/composer
+
+test_backend:
+  stage: test
+  script:
+    - cd backend
+    - cp .env.example .env
+    - composer install
+    - php artisan key:generate
+    - php artisan migrate --force
+    - php artisan test
+
+build_frontend:
+  stage: build
+  image: node:20
+  script:
+    - cd frontend
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - frontend/dist/
+
+docker_backend:
+  stage: docker
+  image: docker:20.10.24
+  services:
+    - docker:dind
+  variables:
+    DOCKER_DRIVER: overlay2
+  before_script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE/backend:latest ./backend
+    - docker push $CI_REGISTRY_IMAGE/backend:latest

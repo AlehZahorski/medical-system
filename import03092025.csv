@@ -1,0 +1,19 @@
+patientId;patientName;patientSurname;patientSex;patientBirthDate;orderId;testName;testValue;testReference
+;;;;;;;;
+1;Piotr;Kowalski;male;12.04.1983;1;Protoporfiryna cynkowa;4.0;< 40,0
+;;;;;;;;
+1;Piotr;Kowalski;male;12.04.1983;1;Wolna trijodotyronina (FT3) (O55);4.00;2,30 - 4,20
+;;;;;;;;
+1;Piotr;Kowalski;male;12.04.1983;2;Tyreotropina (TSH)  trzeciej generacji (L69);334,000 µIU/ml;0,550 - 4,780
+;;;;;;;;
+2;Anna;Jabłońska;female;12.12.2002;3;Cholesterol LDL - wyliczany (K03);42;<70 - Dla bardzo dużego ryzyka > 10% wg skali SCORE\X0A\<100 - Dla dużego ryzyka 5 - 10% wg skali SCORE\X0A\<115 - Dla umiarkowanego lub małego ryzyka < 5% wg skali SCORE
+;;;;;;;;
+2;Anna;Jabłońska;female;12.12.2002;3;Azotyny;nieobecne;nieobecne
+;;;;;;;;
+3;Andrzej;Kowalski;male;31.01.2020;4;Krew;nieobecna;nieobecna
+;;;;;;;;
+1;Piotr;Kowalski;male;12.04.1983;2;Urobilinogen;prawidłowy;prawidłowy
+;;;;;;;;
+3;Andrzej;Kowalski;male;31.01.2020;5;Insulina (L97);lip.40;3,00 - 17,00
+;;;;;;;;
+4;Bożena;Wiśniewska;female;21.11.2021;6;Przejrzystość;przejrzysty;

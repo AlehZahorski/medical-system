@@ -1,0 +1,11 @@
+bootstrap: vendor/autoload.php
+
+formatter:
+  name: pretty
+
+suites:
+  default:
+    namespace: App
+    spec_path: spec
+    src_path: app
+

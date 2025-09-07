@@ -1,0 +1,59 @@
+# ==== Backend (Laravel) ====
+backend/.env
+backend/.env.backup
+backend/.env.production
+backend/.phpactor.json
+backend/.phpunit.result.cache
+backend/.phpunit.cache
+backend/vendor/
+backend/storage/*.key
+backend/storage/pail
+backend/public/storage
+backend/public/hot
+backend/public/build
+backend/Homestead.json
+backend/Homestead.yaml
+backend/auth.json
+backend/.DS_Store
+backend/Thumbs.db
+backend/.idea/
+backend/.vscode/
+backend/.nova/
+backend/.zed/
+backend/.fleet/
+
+# ==== Frontend (Vue) ====
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/coverage/
+frontend/*.local
+frontend/*.tsbuildinfo
+frontend/.DS_Store
+frontend/Thumbs.db
+frontend/.idea/
+frontend/.vscode/
+frontend/.fleet/
+frontend/cypress/videos/
+frontend/cypress/screenshots/
+
+# ==== Ogólne / Globalne ====
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==== IDE / Systemowe ====
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Pozwól na commitowanie rozszerzeń w VSCode (jeśli potrzebne)
+!.vscode/extensions.json
