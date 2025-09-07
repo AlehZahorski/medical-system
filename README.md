@@ -1,123 +1,146 @@
-## Opis Zadania
+# 🩺 Medical System – Laravel + Vue + Docker + CI/CD
 
-### 1. Command do Importu Danych
-
-Zaimplementuj polecenie konsolowe w Laravel, które wczyta dane pacjentów i wyniki ich badań z pliku CSV (results.csv) o następującym formacie:
-
-| patientId | patientName | patientSurname | patientSex | patientBirthDate | orderId | testName | testValue | testReference |
-|-----------|-------------|----------------|------------|------------------|---------|----------|-----------|---------------|
-
-- Importowane dane mają zostać zapisane w bazie danych (tabele pacjentów, zamówień i wyników badań).
-- **Wymagania techniczne:**
-    - Obsługa błędów w przypadku niekompletnego lub wadliwego pliku CSV.
-    - Logowanie poprawnie zaimportowanych rekordów oraz błędów do pliku.
+Projekt rekrutacyjny dla Alab zawierający backend w Laravel 12 oraz frontend w Vue 3 (Vite),
+uruchamiany lokalnie przy użyciu Docker Compose oraz zautomatyzowany w GitLab CI/CD.
 
 ---
 
-### 2. Stworzenie API
+## 📚 Zawartość Repozytorium
 
-- **Endpointy:**
-    - `POST /api/login` – logowanie użytkownika na podstawie loginu (połączenie imienia i nazwiska pacjenta, np. `PiotrKowalski`) i hasła (data urodzenia pacjenta, np. `1983-04-12`). Zwraca token JWT.
-    - `GET /api/results` – zwraca dane zalogowanego pacjenta oraz wyniki jego badań na podstawie tokenu JWT.
-      Endpoint powinien zwrócić dane w następującej postaci:
-```json
-{
-  "patient": {
-    "id": 10,
-    "name": "John",
-    "surname": "Smith",
-    "sex": "m",
-    "birthDate": "2021-01-01"
-  },
-  "orders": [
-    {
-      "orderId": "20",
-      "results": [
-        {
-          "name": "foo",
-          "value": "1",
-          "reference": "1-2"
-        },
-        {
-          "name": "bar",
-          "value": "2",
-          "reference": "1-2"
-        }
-      ]
-    },
-    {
-      "orderId": "21",
-      "results": [
-        {
-          "name": "foo",
-          "value": "1",
-          "reference": "1-2"
-        },
-        {
-          "name": "bar",
-          "value": "2",
-          "reference": "1-2"
-        }
-      ]
-    }
-  ]
-}
-```
-- **Dodatkowe wymagania:**
-    - Autoryzacja za pomocą tokenu JWT.
-    - Obsługa błędów (401 dla nieautoryzowanych żądań, 404 dla braku danych).
+- `backend/` – aplikacja Laravel 12 (API, migracje, testy, seedery)
+- `frontend/` – aplikacja Vue 3 + Vite
+- `.gitlab-ci.yml` – konfiguracja CI/CD
+- `docker-compose.yml` – uruchamianie aplikacji lokalnie (backend, frontend, MySQL, phpMyAdmin)
+- `README.md` – instrukcja uruchomienia
 
 ---
 
-### 3. Frontend (Vue.js)
+## 🚀 Uruchomienie lokalne (Docker)
 
-- **Funkcjonalności:**
-    - **Logowanie użytkownika:**
-        - Formularz logowania (login: imię + nazwisko pacjenta, hasło: data urodzenia).
-        - Po pomyślnym zalogowaniu, użytkownik zostaje przekierowany do widoku z wynikami badań.
-    - **Podgląd danych pacjenta i wyników badań:**
-        - Wyświetlanie szczegółowych informacji o pacjencie.
-        - Lista wyników badań (nazwa badania, wartość, wartość referencyjna).
+### 🔧 Wymagania
 
-- **Wymagania techniczne:**
-    - Przechowywanie tokenu JWT w LocalStorage.
-    - Automatyczne wylogowanie po wygaśnięciu tokenu (nice to have).
+- Docker + Docker Compose
+- Porty 8000, 5173, 3307 i 8081 muszą być wolne
 
----
+### 🛠️ Kroki
 
-### 4. Baza Danych
+a) Sklonuj repozytorium:
 
-- Przygotuj schemat bazy danych (PostgreSQL lub MySQL), który obsłuży:
-    - Pacjentów.
-    - Zamówienia (orderId) i wyniki badań.
-- Zaimplementuj migracje w Laravel.
+- git clone <link-do-repo>
+- cd <nazwa-folderu>
 
----
+b) Skopiuj plik `.env`:
 
-### 5. CI/CD
+cp backend/.env.example backend/.env
 
-- Przygotuj plik konfiguracyjny dla GitLab CI/CD, który:
-    - Uruchamia testy jednostkowe i integracyjne dla API.
-    - Buduje aplikację frontendową (nice to have).
-    - Buduje i wypycha obraz Docker (nice to have).
+c) Uruchom środowisko:
+
+docker-compose up --build
+
+d) W innym terminalu: uruchom migracje i seedery:
+
+docker exec -it laravel-app php artisan migrate:fresh --seed
+
+e) Utwórz link symboliczny do katalogu storage (wymagane przez Laravel):
+
+docker exec -it laravel-app php artisan storage:link
 
 ---
 
-### 6. Docker
+## 📁 Import danych z pliku CSV
 
-- Opracuj plik `docker-compose.yml`, który umożliwi lokalne uruchomienie aplikacji z backendem, frontendem i bazą danych.
+Aby zaimportować dane pacjenta, zamówień i badań:
+
+1. Umieść plik CSV (bez nagłówków) w katalogu:
+
+   backend/storage/app/imports/basic/
+
+2. Nazwa pliku nie może zawierać rozszerzenia w komendzie.
+
+3. Uruchom import:
+
+   docker exec -it laravel-app php artisan import:basic-patient-data {nazwa_pliku_bez_csv}
+
+   Przykład:
+   docker exec -it laravel-app php artisan import:basic-patient-data testowy_plik
 
 ---
 
-## Czas Realizacji
+## 🌐 Dostęp do aplikacji
 
-Zadanie należy wykonać w ciągu **7 dni** od momentu jego otrzymania.
+| Usługa           | Adres                      |
+|------------------|-----------------------------|
+| API (backend)    | http://localhost:8000       |
+| Frontend         | http://localhost:5173       |
+| Admin Panel      | http://localhost:8000/admin |
+| phpMyAdmin       | http://localhost:8081       |
 
 ---
 
-## Wynik Końcowy
+## 🔐 Panel administratora (FilamentPHP)
 
-Kandydat powinien dostarczyć repozytorium GIT (np. link do GitHub/GitLab/Bitbucket), które zawiera:
-- Kod źródłowy backendu i frontendu.
-- Pliki konfiguracyjne Docker, CI/CD i migracji.
-- Plik README.md z instrukcjami uruchomienia projektu i pipeline’a CI/CD.
+W projekcie zintegrowano panel admina oparty o **FilamentPHP**.
+
+Dane logowania:
+
+Login:  admin@alab.pl  
+Hasło:  Alab123!
+
+---
+
+## ✅ Testy backendu (PHPUnit)
+
+Uruchomienie testów:
+
+docker exec -it laravel-app php artisan test
+
+---
+
+## ⚙️ CI/CD (GitLab Pipelines)
+
+Plik `.gitlab-ci.yml` zawiera:
+
+a) Testy backendu – `php artisan test`  
+b) Budowanie frontendu – `npm run build`  
+c) Docker build & push – opcjonalne wypychanie obrazu
+
+---
+
+## 🧪 Baza danych w CI/CD
+
+- Nazwa: `testing_db`
+- Użytkownik: `root`
+- Hasło: `root`
+
+---
+
+## 📂 Struktura katalogów
+
+- backend/           # Laravel 12 (API)
+- frontend/          # Vue 3 + Vite
+- docker-compose.yml
+- .gitlab-ci.yml
+- README.md
+- README_AZ.md
+
+---
+
+## 📦 Obraz Docker (opcjonalnie)
+
+Budowanie i wypychanie:
+
+docker build -t my-app ./backend  
+docker tag my-app registry.gitlab.com/username/project-name  
+docker push registry.gitlab.com/username/project-name
+
+---
+
+## 👤 Autor
+
+**Aleh Zahorski**  
+Zadanie wykonane w ramach procesu rekrutacyjnego.  
+Czas realizacji: maksymalnie 7 dni od otrzymania zadania.
+
+---
+
+Dziękuję za możliwość wykonania zadania!
