@@ -147,9 +147,4 @@ Dziękuję za możliwość wykonania zadania!
 Nie udało mi się lokalnie uruchomić gitlab proces, 
 przewaznie pracowałem i obecnie pracuję z bitbucket, 
 dlatego konfuguracja ci/cd wyglada nie co inaczej dla mnie na co dzień, 
-ale podejrzewam ze z gitlab podobno jak z bb nic trudnego :)
-
-PS: wyglada sensownie ta konfiguracja co mi chat podał, ale nie ręczę się za to!
-
-PS2: testy zrobiłem jakie potrafie, spec oraz unit, na froncie testów nigdy nie robiłem, 
-ale kojarzę mniej więcej jak to wygląda.
+ale z tego co widzę z gitlab podobno jak z bb nic trudnego :)
