@@ -1,6 +1,6 @@
 # 🩺 Medical System – Laravel + Vue + Docker + CI/CD
 
-Projekt rekrutacyjny dla Alab zawierający backend w Laravel 12 oraz frontend w Vue 3 (Vite),
+Projekt rekrutacyjny zawierający backend w Laravel 12 oraz frontend w Vue 3 (Vite),
 uruchamiany lokalnie przy użyciu Docker Compose oraz zautomatyzowany w GitLab CI/CD.
 
 ---
@@ -51,7 +51,7 @@ docker exec -it laravel-app php artisan storage:link
 
 Aby zaimportować dane pacjenta, zamówień i badań:
 
-1. Umieść plik CSV (bez nagłówków) w katalogu:
+1. Umieść plik CSV w katalogu:
 
    backend/storage/app/imports/basic/
 
@@ -121,7 +121,7 @@ c) Docker build & push – opcjonalne wypychanie obrazu
 - docker-compose.yml
 - .gitlab-ci.yml
 - README.md
-- README_AZ.md
+- README_ALAB.md
 
 ---
 
@@ -147,14 +147,9 @@ Dziękuję za możliwość wykonania zadania!
 Nie udało mi się lokalnie uruchomić gitlab proces, 
 przewaznie pracowałem i obecnie pracuję z bitbucket, 
 dlatego konfuguracja ci/cd wyglada nie co inaczej dla mnie na co dzień, 
-ale podejrzewam ze z gitlab tak samo nie ma nic trudnego :)
+ale podejrzewam ze z gitlab podobno jak z bb nic trudnego :)
 
 PS: wyglada sensownie ta konfiguracja co mi chat podał, ale nie ręczę się za to!
 
 PS2: testy zrobiłem jakie potrafie, spec oraz unit, na froncie testów nigdy nie robiłem, 
 ale kojarzę mniej więcej jak to wygląda.
-
-PS3: oczywiście nie ukrywam bo moim zdaniem nie ma co, 
-korzystałem z gpt dla generowania niektorych mechanizmów, w tym też częściowo dokumentacji :)
-
-PS4: Oczywiście za całą reszte się ręczam!
